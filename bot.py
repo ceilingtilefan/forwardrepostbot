@@ -13,11 +13,13 @@ class MyClient(discord.Client):
                 author = message.author
                 authorAvatar = message.author.avatar.url
                 forwardContent = message.message_snapshots[0].content
-                forwardAttachments = message.message_snapshots[0].attachments
+                #forwardAttachments = message.message_snapshots[0].attachments
                 forwardEmbed = discord.Embed(
                     title=f"{forwardContent}",
                 )
+                #forwardEmbed.image(url=forwardAttachments)
                 forwardEmbed.set_footer(text=f"Forwarded by {author}", icon_url=authorAvatar)
+            
                 await message.reply(embed=forwardEmbed, mention_author=False)
 
 intents = discord.Intents.default()
