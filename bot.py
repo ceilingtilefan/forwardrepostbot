@@ -11,13 +11,14 @@ class MyClient(discord.Client):
             authorAvatar = message.author.avatar.url
             forwardContent = message.message_snapshots[0].content
             forwardAttachments = message.message_snapshots[0].attachments
+            creationTime = message.message_snapshots[0].created_at
             imageTypes = [".png", ".jpg", ".jpeg", ".webp", ".gif"]
             embedList = []
 
             if len(forwardContent) == 0:
                 forwardContent = "Forward contained no text"            
-            forwardEmbed = discord.Embed(description=f"{forwardContent}")
-            forwardEmbed.set_footer(text=f"Forwarded by {author}", icon_url=authorAvatar)
+            forwardEmbed = discord.Embed(description=f"{forwardContent}", timestamp=creationTime)
+            forwardEmbed.set_footer(text=f"Forwarded by {author}" , icon_url=authorAvatar)
             
             await message.reply(embed=forwardEmbed, mention_author=False) 
             #testing = [imageTypes for url in forwardAttachments in imageTypes]
