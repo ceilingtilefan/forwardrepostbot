@@ -1,5 +1,5 @@
 # forwardrepostbot
-Basic Discord bot to repost forwarded messages as basic embeds for older clients\\
+Basic Discord bot to repost forwarded messages as basic embeds for older clients\
 
 ![Screenshot1](images/screenshot_1.png)
 
