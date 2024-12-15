@@ -14,4 +14,4 @@ Set the TOKEN environment variable: `export TOKEN=PLACE TOKEN HERE`\
 Start the container: `docker compose up` (you can add `-d` to make it start automatically)
 
 # Features
-Automatically reposts forwarded messages as embeds. Does not work with attachments (yet)
+Automatically reposts forwarded messages as embeds. Works with images.
