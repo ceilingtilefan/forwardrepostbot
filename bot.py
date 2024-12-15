@@ -1,12 +1,12 @@
 import discord
+import os
 
 class MyClient(discord.Client):
     async def on_ready(self):
-        print(f'Logged on as {self.user}! Discord.py version {discord.__version__}')
+        print(f'Logged on as {self.user} using Discord.py version {discord.__version__}')
 
     async def on_message(self, message):
         if message.flags.forwarded == True:
-            print(len(message.content))
             if len(message.message_snapshots[0].content) > 256:
                 await message.channel.send("Forwarded messages must be 256 or fewer in length.", delete_after=5)
             else:
@@ -26,5 +26,6 @@ intents.message_content = True
 client = MyClient(intents=intents)
 
 with open('token.txt') as f:
-    token = f.readline()
+    tokentxt = f.readline()
+token = os.getenv('TOKEN', tokentxt)
 client.run(token)
