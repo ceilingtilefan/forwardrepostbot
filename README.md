@@ -1,6 +1,6 @@
 # forwardrepostbot
-Basic Discord bot to repost forwarded messages as basic embeds for older clients
-![Screenshot 1][images/screenshot_1.png]
+Basic Discord bot to repost forwarded messages as basic embeds for older clients\
+![Screenshot1](images/screenshot_1.png)
 
 # Setup
 Place your token in a text file named token.txt\
