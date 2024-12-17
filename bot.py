@@ -1,4 +1,4 @@
-import discord
+import discord # type: ignore
 import os
 
 class MyClient(discord.Client):
@@ -6,13 +6,15 @@ class MyClient(discord.Client):
         print(f'Logged on as {self.user} using Discord.py version {discord.__version__}')
 
     async def on_message(self, message):
+        if message.content == "exit":
+            await self.close() 
         if message.flags.forwarded == True:   
             author = message.author
             authorAvatar = message.author.avatar.url
             forwardContent = message.message_snapshots[0].content
             forwardAttachments = message.message_snapshots[0].attachments
             creationTime = message.message_snapshots[0].created_at
-            imageTypes = [".png", ".jpg", ".jpeg", ".webp", ".gif"]
+            imageExts = ["png", "jpg", "jpeg", "webp", "gif"]
             embedList = []
 
             if len(forwardContent) == 0:
@@ -21,12 +23,19 @@ class MyClient(discord.Client):
             forwardEmbed.set_footer(text=f"Forwarded by {author}" , icon_url=authorAvatar)
             
             await message.reply(embed=forwardEmbed, mention_author=False) 
-            #testing = [imageTypes for url in forwardAttachments in imageTypes]
             if forwardAttachments:
-                for url in forwardAttachments:
-                    newEmbed = discord.Embed(url='https://soggy.cat').set_image(url=str(url))
-                    embedList.append(newEmbed)
-                await message.channel.send(embeds=embedList)
+                for attachment in forwardAttachments:
+                    file_ext = attachment.filename.split(".")[-1].lower()
+                    if file_ext in imageExts:
+                        newEmbed = discord.Embed(url='https://soggy.cat').set_image(url=str(attachment.url))
+                        embedList.append(newEmbed)
+                    else:
+                        attachmentURLs = [attachment.url for attachment in forwardAttachments]
+                        formattedURLs = "\n".join(attachmentURLs)
+                if attachmentURLs:
+                    await message.channel.send(f"Non-image attachments: {formattedURLs}")
+                if embedList:
+                    await message.channel.send(embeds=embedList)
 
 intents = discord.Intents.default()
 intents.message_content = True
