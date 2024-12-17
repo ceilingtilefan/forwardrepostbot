@@ -11,7 +11,9 @@ Install the latest development (2.5.0) of Discord.py and use `python3 bot.py` to
 ## Docker:
 Clone this repository: `git clone https://github.com/ceilingtilefan/forwardrepostbot` and enter the folder\
 Set the TOKEN environment variable: `export TOKEN=PLACE TOKEN HERE`\
+You can also place it in token.txt\
 Start the container: `docker compose up` (you can add `-d` to make it start automatically)
 
 # Features
 Automatically reposts forwarded messages as embeds. Works with images.
+Attachments that cannot be placed in an embed will have direct links sent instead
