@@ -6,8 +6,6 @@ class MyClient(discord.Client):
         print(f'Logged on as {self.user} using Discord.py version {discord.__version__}')
 
     async def on_message(self, message):
-        if message.content == "exit":
-            await self.close() 
         if message.flags.forwarded == True:   
             author = message.author
             authorAvatar = message.author.avatar.url
