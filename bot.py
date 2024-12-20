@@ -30,10 +30,16 @@ class MyClient(discord.Client):
                     else:
                         attachmentURLs = [attachment.url for attachment in forwardAttachments]
                         formattedURLs = "\n".join(attachmentURLs)
-                if attachmentURLs:
-                    await message.channel.send(f"Non-image attachments: {formattedURLs}")
-                if embedList:
-                    await message.channel.send(embeds=embedList)
+                try:
+                    if embedList is not None:
+                        await message.channel.send(embeds=embedList)
+                except Exception:
+                    pass
+                try:
+                    if attachmentURLs is not None:
+                        await message.channel.send(f"Non-image attachments: {formattedURLs}")
+                except Exception:
+                    pass
 
 intents = discord.Intents.default()
 intents.message_content = True
