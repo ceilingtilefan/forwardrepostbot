@@ -2,10 +2,5 @@ services:
   bot:
     container_name: bot
     image: python
-    working_dir: /opt/bot
-    env_file:
-      - .env
-    volumes:
-      - ./:/opt/bot
-    command: sh -c "pip install --no-cache-dir git+https://github.com/Rapptz/discord.py@master && python bot.py"
+    command: sh -c "pip install --no-cache-dir git+https://github.com/Rapptz/discord.py@master && git clone https://github.com/ceilingtilefan/forwardrepostbot && cd forwardrepostbot && python bot.py"
     restart: unless-stopped
